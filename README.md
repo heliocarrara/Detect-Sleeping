@@ -142,7 +142,7 @@ Internally, the logic is split between:
 
 ### License
 
-Define the license you want to use for this project (MIT, Apache 2.0, etc.) and add the corresponding text here.
+This project is licensed under the MIT License.
 
 ---
 
@@ -288,4 +288,4 @@ Internamente, essa lógica está dividida em:
 
 ### Licença
 
-Defina a licença que deseja usar para este projeto (MIT, Apache 2.0, etc.) e adicione o texto correspondente aqui.
+Este projeto está licenciado sob a Licença MIT.
