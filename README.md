@@ -91,7 +91,9 @@ The main window will open with:
 - A slider to adjust EAR sensitivity  
 - A video area showing processed frames  
 - A status bar indicating if drowsiness is detected  
-![alt text](image.png)![alt text](image-1.png)
+<img width="754" height="667" alt="image" src="https://github.com/user-attachments/assets/610b254d-09e6-447d-b6ba-1a9bffc23896" />
+<img width="744" height="660" alt="image" src="https://github.com/user-attachments/assets/9cb0c566-430a-4fc6-8970-d9c36681d471" />
+
 ---
 
 ### How It Works
