@@ -105,19 +105,25 @@ The main window will open with:
 5. The Eye Aspect Ratio (EAR) is computed for each eye and averaged.  
 6. If the EAR stays below the chosen threshold for a number of consecutive frames, the app triggers a drowsiness alert on the video frame and status bar.
 
-Internally, the logic is implemented in the `DetectorSonoApp` class in `main.py`.
+Internally, the logic is split between:
+- `main.py`: small entry point that creates the Tkinter window.
+- `app.py`: Tkinter UI and webcam control (`DetectorSonoApp` class).
+- `detection.py`: MediaPipe Face Landmarker and EAR-based drowsiness logic.
 
 ---
 
 ### Project Structure (simplified)
 
 - `main.py`  
+  - Entry point; creates the Tk root window and instantiates `DetectorSonoApp`.  
+- `app.py`  
   - `DetectorSonoApp`: main Tkinter application class  
   - GUI setup (camera selector, buttons, slider, status label)  
-  - MediaPipe Face Landmarker initialization and model download  
-  - `process_frame`: reads camera, runs detection, draws landmarks, computes EAR, updates UI  
-  - `calculate_ear`: helper method to compute the Eye Aspect Ratio  
-  - `toggle_camera`: handles camera start/stop logic  
+  - Webcam lifecycle control (`toggle_camera`, `process_frame` loop)  
+- `detection.py`  
+  - `DrowsinessDetector`: encapsulates MediaPipe Face Landmarker configuration  
+  - Computes Eye Aspect Ratio (EAR) from eye landmarks  
+  - Applies the consecutive-frames rule to decide when to trigger an alert  
 - `requirements.txt` – pinned Python dependencies  
 - `.gitignore` – excludes `.venv`, build artifacts, and the model file  
 - `README.md` – project documentation (English and Portuguese)  
@@ -245,19 +251,25 @@ A janela principal será aberta com:
 5. A razão de aspecto dos olhos (EAR) é calculada para cada olho e, depois, feita a média.  
 6. Se o EAR permanecer abaixo do limiar escolhido por um número de frames consecutivos, a aplicação aciona um alerta de sonolência no frame de vídeo e na barra de status.
 
-Internamente, essa lógica é implementada na classe `DetectorSonoApp` em `main.py`.
+Internamente, essa lógica está dividida em:
+- `main.py`: ponto de entrada simples que cria a janela Tkinter.  
+- `app.py`: interface Tkinter e controle da webcam (classe `DetectorSonoApp`).  
+- `detection.py`: lógica de detecção, MediaPipe Face Landmarker e cálculo de EAR.  
 
 ---
 
 ### Estrutura do Projeto (simplificada)
 
 - `main.py`  
-  - `DetectorSonoApp`: classe principal da aplicação Tkinter  
+  - Ponto de entrada; cria a janela raiz Tk e instancia `DetectorSonoApp`.  
+- `app.py`  
+  - `DetectorSonoApp`: classe principal Tkinter  
   - Configuração da GUI (seletor de câmera, botões, slider, status)  
-  - Inicialização do MediaPipe Face Landmarker e download do modelo  
-  - `process_frame`: lê a câmera, roda a detecção, desenha os pontos, calcula EAR, atualiza a interface  
-  - `calculate_ear`: função auxiliar que calcula a razão de aspecto dos olhos  
-  - `toggle_camera`: lógica para ligar/desligar a câmera  
+  - Controle do ciclo de vida da webcam (`toggle_camera`, loop de `process_frame`).  
+- `detection.py`  
+  - `DrowsinessDetector`: encapsula configuração do MediaPipe Face Landmarker  
+  - Calcula EAR a partir dos marcos dos olhos  
+  - Aplica a regra de frames consecutivos para decidir o alerta  
 - `requirements.txt` – dependências Python com versões fixadas  
 - `.gitignore` – exclui `.venv`, artefatos de build e o arquivo de modelo  
 - `README.md` – documentação do projeto (inglês e português)  
